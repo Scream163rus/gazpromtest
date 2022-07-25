@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:gui="http://schemas.haulmont.com/cuba/spring/cuba-gui.xsd">
+
+    <!-- Annotation-based beans -->
+    <context:component-scan base-package="com.company.gazpromtest"/>
+    
+    <gui:screens base-packages="com.company.gazpromtest.web"/>
+    <bean id="gazpromtest_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="gazpromtest_OpenWeatherService" value="com.company.gazpromtest.service.OpenWeatherService"/>
+                <entry key="gazpromtest_WeatherDataService" value="com.company.gazpromtest.service.WeatherDataService"/>
+                <entry key="gazpromtest_WeatherRepositoryService"
+                       value="com.company.gazpromtest.service.WeatherRepositoryService"/>
+                <entry key="gazpromtest_WeatherDataRepositoryService"
+                       value="com.company.gazpromtest.service.WeatherDataRepositoryService"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

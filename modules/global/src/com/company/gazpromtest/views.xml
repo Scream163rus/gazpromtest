@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="gazpromtest_Weather" name="weather-view" extends="_local">
+        <property name="weatherData" view="_minimal">
+            <property name="city"/>
+        </property>
+    </view>
+    <view entity="gazpromtest_WeatherData" name="weatherData-view" extends="_local" systemProperties="true">
+        <property name="weatherList" view="_minimal">
+            <property name="temp"/>
+            <property name="feelsLike"/>
+            <property name="pressure"/>
+            <property name="humidity"/>
+            <property name="fromDate"/>
+            <property name="toDate"/>
+            <property name="weatherData" view="_minimal"/>
+        </property>
+    </view>
+</views>

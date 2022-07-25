@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://weatherBrowse.caption"
+        focusComponent="weathersTable"
+        messagesPack="com.company.gazpromtest.web.screens.weather">
+    <data readOnly="true">
+        <collection id="weathersDc"
+                    class="com.company.gazpromtest.entity.Weather">
+            <view extends="_local">
+                <property name="weatherData" view="_minimal">
+                    <property name="city"/>
+                </property>
+            </view>
+            <loader id="weathersDl"/>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="weathersTable"
+            spacing="true">
+        <vbox spacing="true">
+            <lookupField  caption="msg://cityField" id="cityLookupField" optionsEnum="com.company.gazpromtest.entity.City"/>
+            <checkBox id="currentWeatherCheckBox" caption="msg://currentWeather"/>
+            <lookupField caption="msg://dateFrom" id="fromDateField" editable="false"/>
+            <lookupField caption="msg://toDate" id="toDateField" editable="false"/>
+        </vbox>
+        <groupTable id="weathersTable"
+                    width="100%"
+                    dataContainer="weathersDc">
+            <actions>
+            </actions>
+            <columns>
+                <column id="temp"/>
+                <column id="feelsLike"/>
+                <column id="pressure"/>
+                <column id="humidity"/>
+                <column id="description"/>
+                <column id="fromDate"/>
+                <column id="toDate"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
