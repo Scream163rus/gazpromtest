@@ -1,11 +1,11 @@
-#Описание классов
-1.OpenWeatherConfig - конфиг с основными параметрами
-  Методы:
-    getOpenWeatherForecastUrl - прямая ссылка на получение погоды по городу
-    getUpdateTime - Частота обновления данных в минутах
-2. WeatherData - сущность содержащая в себе название города и список сущностей Weather(погода)
-3. Weather - сущность для хранения основной инфромации для погоды
-4.OpenWeatherService - сервис работающий с апи OpenWeatherMap 
+#Описание классов<br/>
+1.OpenWeatherConfig - конфиг с основными параметрами<br/>
+  Методы:<br/>
+    getOpenWeatherForecastUrl - прямая ссылка на получение погоды по городу<br/>
+    getUpdateTime - Частота обновления данных в минутах<br/>
+2. WeatherData - сущность содержащая в себе название города и список сущностей Weather(погода)<br/>
+3. Weather - сущность для хранения основной инфромации для погоды<br/>
+4.OpenWeatherService - сервис работающий с апи OpenWeatherMap<br/>
   Метод:
     getCityWeather - получает в xml формате при помощи RestTemplate данные из OpenWeatherMap
 5. WeatherDataRepositoryService - Репозиторий-сервис для работы с сущностью WeatherData
