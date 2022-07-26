@@ -21,7 +21,7 @@
             spacing="true">
         <vbox spacing="true">
             <lookupField  caption="msg://cityField" id="cityLookupField" optionsEnum="com.company.gazpromtest.entity.City"/>
-            <checkBox id="currentWeatherCheckBox" caption="msg://currentWeather"/>
+            <checkBox editable="false" id="currentWeatherCheckBox" caption="msg://currentWeather"/>
             <lookupField caption="msg://dateFrom" id="fromDateField" editable="false"/>
             <lookupField caption="msg://toDate" id="toDateField" editable="false"/>
         </vbox>

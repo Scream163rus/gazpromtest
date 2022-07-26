@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface WeatherDataService {
     String NAME = "gazpromtest_WeatherDataService";
-    WeatherData getWeatherDataByCity(String city);
+    WeatherData getWeatherDataByWeatherDataCity(String city);
+    List<Weather> getWeatherDataByCity(String city);
     List<Weather> getWeatherDataByCityAndDate(String city, LocalDateTime fromDate, LocalDateTime toDate);
     List<Weather> updateWeathers(WeatherData weatherData);
     boolean checkNeededUpdate(WeatherData weatherData);

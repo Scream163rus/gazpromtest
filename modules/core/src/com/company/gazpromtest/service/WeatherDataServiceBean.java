@@ -33,7 +33,7 @@ public class WeatherDataServiceBean implements WeatherDataService {
     @Inject
     private WeatherRepositoryService weatherRepositoryService;
 
-    public WeatherData getWeatherDataByCity(String city) {
+    public WeatherData getWeatherDataByWeatherDataCity(String city) {
         WeatherData weatherData = weatherDataRepositoryService.getWeatherDataByCity(city);
         if(weatherData == null){
             weatherData = metadata.create(WeatherData.class);
@@ -41,6 +41,9 @@ public class WeatherDataServiceBean implements WeatherDataService {
         }
         if(checkNeededUpdate(weatherData)){
             List<Weather> weathers = updateWeathers(weatherData);
+            if(weathers == null){
+                return null;
+            }
             WeatherData weatherDataSave = weatherDataRepositoryService.save(weatherData);
             weathers.forEach(weather -> weather.setWeatherData(weatherDataSave));
             List<Weather> saveWeathers = weatherRepositoryService.saveAll(weathers).stream()
@@ -49,6 +52,15 @@ public class WeatherDataServiceBean implements WeatherDataService {
             weatherData.setWeatherList(saveWeathers);
         }
         return weatherData;
+    }
+
+    @Override
+    public List<Weather> getWeatherDataByCity(String city) {
+        WeatherData weatherDataByCity = weatherDataRepositoryService.getWeatherDataByCity(city);
+        if(weatherDataByCity != null){
+            return weatherDataByCity.getWeatherList();
+        }
+        return null;
     }
 
     @Override
@@ -63,14 +75,22 @@ public class WeatherDataServiceBean implements WeatherDataService {
         if(toDate != null){
             return weatherRepositoryService.getWeatherByCity(toDate, city);
         }
-        return getWeatherDataByCity(city).getWeatherList();
+        WeatherData weatherDataByWeatherDataCity = getWeatherDataByWeatherDataCity(city);
+        if(weatherDataByWeatherDataCity == null){
+            return null;
+        }
+        return weatherDataByWeatherDataCity.getWeatherList();
     }
 
 
     @Override
     @Transactional
     public List<Weather> updateWeathers(WeatherData weatherData) {
-        List<WeatherDto> weatherDtoList = openWeatherMapXmlParser.parse(openWeatherService.getCityWeather(weatherData.getCity()), weatherData.getCity()).getWeatherList();
+        String weathersXml = openWeatherService.getCityWeather(weatherData.getCity());
+        if(weathersXml == null){
+            return null;
+        }
+        List<WeatherDto> weatherDtoList = openWeatherMapXmlParser.parse(weathersXml, weatherData.getCity()).getWeatherList();
         List<Weather> newWeatherList = weatherDtoList.stream().map(WeatherDto::toWeather).collect(Collectors.toList());
         List<Weather> oldWeatherList = weatherData.getWeatherList();
         if(oldWeatherList == null || oldWeatherList.isEmpty()){
