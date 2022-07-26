@@ -8,7 +8,13 @@ import javax.annotation.Nullable;
 public enum City implements EnumClass<String> {
 
     TOGLIATTI("Togliatti"),
-    SAMARA("Samara");
+    SAMARA("Samara"),
+    MOSCOW("Moscow"),
+    SAINTPETERSBURG("Saint Petersburg"),
+    CHELYABINSK("Chelyabinsk"),
+    KAZAN("Kazan"),
+    YEKATERINBURG("Yekaterinburg"),
+    NOVOSIBIRSK("Novosibirsk");
 
     private String id;
 

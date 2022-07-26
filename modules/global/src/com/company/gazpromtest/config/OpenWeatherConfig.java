@@ -14,9 +14,4 @@ public interface OpenWeatherConfig extends Config {
     @Property("api.updatetime")
     @DefaultLong(30)
     long getUpdateTime();
-
-    @Property("api.openweather.current")
-    @DefaultString("https://api.openweathermap.org/data/2.5/weather?mode=xml&units=metric&lang=ru&appid=8663bf28ca4b91c02e1a7314e9cdfccd&q=%s")
-    String getOpenWeatherCurrentUrl();
-
 }

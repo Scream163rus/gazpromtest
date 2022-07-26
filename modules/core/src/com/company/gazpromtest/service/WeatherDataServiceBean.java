@@ -8,6 +8,7 @@ import com.company.gazpromtest.entity.WeatherData;
 import com.company.gazpromtest.parser.Parser;
 import com.haulmont.cuba.core.global.Metadata;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
@@ -51,6 +52,7 @@ public class WeatherDataServiceBean implements WeatherDataService {
     }
 
     @Override
+    @Transactional
     public List<Weather> getWeatherDataByCityAndDate(String city, LocalDateTime fromDate, LocalDateTime toDate) {
         if(fromDate != null && toDate != null) {
             return weatherRepositoryService.getWeatherByCity(city, fromDate, toDate);
@@ -66,6 +68,7 @@ public class WeatherDataServiceBean implements WeatherDataService {
 
 
     @Override
+    @Transactional
     public List<Weather> updateWeathers(WeatherData weatherData) {
         List<WeatherDto> weatherDtoList = openWeatherMapXmlParser.parse(openWeatherService.getCityWeather(weatherData.getCity()), weatherData.getCity()).getWeatherList();
         List<Weather> newWeatherList = weatherDtoList.stream().map(WeatherDto::toWeather).collect(Collectors.toList());
